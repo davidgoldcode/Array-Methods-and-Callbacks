@@ -77,11 +77,19 @@ Parameters:
  * callback function getYears
  */
 
-function getWinnersByYear(/* code here */) {
-
+function getWinnersByYear(cbGetWinners, cbGetYears) {
+    const combinedArr = [cbGetWinners, cbGetYears];
+    let winnersAndYears = [];
+    for (let i = 0; i < cbGetWinners.length; i++) {
+        winnersAndYears.push(`In ${cbGetYears[i]}, ${cbGetWinners[i]} won the worldcup`)
+    }
+    // combinedArr.forEach(function(item){
+    //     winnersAndYears.push(`In ${item.combinedArr[1]}, ${item.combinedArr[0]} won thee worldcup`); 
+    // })
+    return winnersAndYears;
 };
 
-getWinnersByYear();
+console.log(getWinnersByYear(getWinners(getFinals(fifaData)), getYears((getFinals(fifaData)))));
 
 /* Task 7: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
@@ -104,13 +112,16 @@ console.log(getAverageGoals(fifaData));
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
-
-    /* code here */
-
+function getCountryWins(data, team_initials) {
+    const numOfWins = theFinals.filter(function(item) {
+        return item["Away Team Initials"] === team_initials || item["Home Team Initials"] === team_initials; 
+    }).reduce(function(accumulator, item){
+        return accumulator + 1;
+        }, 0);
+    return numOfWins;
 };
 
-getCountryWins();
+console.log(fifaData, "MEX");
 
 
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
