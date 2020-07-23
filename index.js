@@ -136,14 +136,39 @@ console.log(getCountryWins(fifaData, "ITA"));
 /* Stretch 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
 function getGoals(data) {
-    let listOfTeams = data.map(function(item){
-        return item["Home Team Name"], item["Away Team Name"] 
+    var counts = {};
+    const finals = getFinals(data);
+    let listOfTeams1 = finals.map(function(item){
+        return `${item["Home Team Name"]}`;
     })
-    let dedupeTeams = [...new Set(listOfTeams)]; //dedupe teams
-    let dedupeTotals = 
-    for (let i = 0; i < dedupeTeams; i++) {
-        if 
-    }
+
+    let listOfTeams2 = finals.map(function(item){
+        return `${item["Away Team Name"]}`;
+    })
+
+    let listOfTeams = [...listOfTeams1, ...listOfTeams2];
+    console.log(listOfTeams) ;
+
+    listOfTeams.forEach(function(item, index){
+        var num = listOfTeams[index];
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+    })
+
+    console.log(counts);
+
+    listOfTeams.forEach(function(item){
+        item === finals["Home Team Name"] ? counts.item.totalPoints += finals["Home Team Goals"] : item === finals["Away Team Name"] ? counts.item.totalPoints += finals["Away Team Goals"] : 0
+    })
+    
+    console.log(counts);
+
+//     finals.forEach(function(item){
+//         listOfTeams.forEach(function(item) {
+//             item === finals["Home Team Initials"] || item === finals["Away Team Initials"]
+// ? listOfTeams["Total Score Tally"]+= 1 : 0;})
+//     })
+
+    console.log(listOfTeams);
 };
 
 console.log(getGoals(fifaData));
